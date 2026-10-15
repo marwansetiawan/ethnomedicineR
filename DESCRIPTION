@@ -1,0 +1,39 @@
+Package: ethnomedicineR
+Type: Package
+Title: Quantitative Ethnomedicine and Traditional Drug Discovery
+        Toolkit
+Version: 0.1.0
+Authors@R: c(
+    person(
+      given = "Marwan",
+      family = "Setiawan",
+      email = "marw002@brin.go.id",
+      role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0003-2754-0640")
+    )
+  )
+Description: A comprehensive toolkit for quantitative ethnomedicine analysis 
+    and traditional drug discovery. Implements core indices including Use 
+    Value (UV), Fidelity Level (FL), Informant Consensus Factor (ICF), 
+    Relative Importance (RI), Cultural Importance (CI), Medicinal Use Value 
+    (MUV), Informant Agreement Ratio (IAR), and Botanical Ethnoknowledge 
+    Index (BEI). Provides high-performance computing tools including parallel 
+    processing, machine learning prioritization, and network pharmacology 
+    visualization. Methods are based on Friedman et al. (1986), 
+    Trotter and Logan (1986), Phillips and Gentry (1993), Bennett and Prance 
+    (2000), Tardío and Pardo-de-Santayana (2008), and Silva et al. (2019).
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Imports: dplyr, magrittr, parallel, doParallel, foreach, caret,
+        xgboost, igraph, nnet, httr2, jsonlite
+Suggests: knitr, rmarkdown, testthat
+Depends: R (>= 4.1.0)
+Language: en-US
+VignetteBuilder: knitr
+Config/roxygen2/version: 8.1.0
+NeedsCompilation: no
+Packaged: 2026-10-15 21:54:06 UTC; marw0
+Author: Marwan Setiawan [aut, cre] (ORCID:
+    <https://orcid.org/0000-0003-2754-0640>)
+Maintainer: Marwan Setiawan <marw002@brin.go.id>

@@ -1,0 +1,230 @@
+---
+title: "Quantitative ethnomedicine analysis with ethnomedicineR"
+author: "Marwan Setiawan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Quantitative ethnomedicine analysis with ethnomedicineR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(ethnomedicineR)
+```
+
+# Quantitative ethnomedicine analysis with `ethnomedicineR`
+
+#### Marwan Setiawan, BRIN
+
+Please remember to cite the `ethnomedicineR` package if you use it in your publications. Use `citation("ethnomedicineR")` to get a citation for the latest version.
+
+> To cite package 'ethnomedicineR' in publications use:
+> 
+> Marwan Setiawan (2026). _ethnomedicineR: A Quantitative Toolkit for Traditional Drug Discovery, Integrating Ethnomedicine with High-Performance Computing and AI_. R package version 0.1.0.
+
+## A Critical Perspective on Ethnomedicine Indices
+
+Quantitative ethnomedicine is the study of the use and importance of medicinal plants in human cultures, using statistical and analytical methods to quantify and interpret data. This approach has emerged as a key tool for understanding the cultural and therapeutic significance of plant species, and for evaluating the potential of traditional medicine for modern drug discovery.
+
+While widely used in the literature, traditional ethnomedicine indices have significant limitations that researchers should consider:
+
+- **Oversimplification**: Complex cultural-therapeutic relationships reduced to single numbers
+- **Context stripping**: Remove cultural, ecological, and historical context
+- **Methodological issues**: Sensitive to sampling design and interview methods
+- **Theoretical concerns**: Often lack strong theoretical foundations
+
+### When to use these indices:
+- Preliminary exploratory analysis
+- Comparison with existing literature that uses similar methods
+- As input variables for more sophisticated models (not as final results)
+- For prioritizing plants for pharmacological screening
+
+### When to avoid these indices:
+- As primary evidence for policy decisions
+- For cross-cultural comparisons without careful validation
+- As standalone measures of "therapeutic importance"
+
+The field of ethnomedicine has a long history, with roots dating back to the early 20th century when researchers began to systematically study the relationships between humans and medicinal plants. In recent decades, advances in statistical and computational techniques have enabled researchers to more rigorously and systematically analyze and interpret ethnomedicinal data, leading to a greater understanding of the complex and diverse ways in which plants are used and valued in different cultural and ecological contexts.
+
+Today, quantitative ethnomedicine is an interdisciplinary field that draws on a range of methods and approaches from the natural and social sciences, including anthropology, pharmacology, biology, and ecology. It is a rapidly growing field that is making significant contributions to our understanding of human-plant relationships, and to the discovery of new therapeutic agents.
+
+## Using the `ethnomedicineR` package
+
+The `ethnomedicineR` package offers quantitative tools to assess the cultural and therapeutic significance of medicinal plant species based on informant consensus. The package closely follows several key papers on ethnomedicine indices (Friedman et al. 1986; Tardío and Pardo-de-Santayana 2008; Bennett and Prance 2000) and modern computational approaches inspired by high-performance computing (Shaw et al. 2008), AI-driven drug discovery (NVIDIA 2026), and quantum-centric supercomputing (RIKEN/IBM 2026).
+
+The goal is to provide an easy-to-use platform for ethnomedicine researchers to perform quantitative assessments, from traditional indices to advanced computational methods.
+
+Users are highly encouraged to familiarize themselves with ethnomedicine theory (Heinrich et al. 2018) and pharmacognosy (Evans 2009). An overview of this theoretical background will be helpful in understanding approaches in ethnomedicine and formulating useful research questions.
+
+## Data format
+
+An example data set called `medicinal_data` is provided to show how standard quantitative ethnomedicine data should be formatted to interface with the `ethnomedicineR` package.
+
+This is an ethnomedicine data set including:
+- One column of 20 knowledge holder identifiers (`informant`)
+- One column of 50 species names (`species`)
+- One column of disease categories (`disease`)
+- One column of plant parts used (`plant_part`)
+- One column of preparation methods (`preparation`)
+
+```{r}
+data(medicinal_data)
+head(medicinal_data)
+```
+
+Many of the functions in `ethnomedicineR` make use of `select()` and `filter()` functions of the `dplyr` package (Wickham et al. 2026) and pipe functions `%>%` from the `magrittr` package (Bache and Wickham 2025). The intention is that these should be easy to understand and use, and that they should allow users the chance to pull the code for these functions and change anything they see fit.
+
+## Core Ethnomedicine Indices
+
+Ethnomedicine indices are numerical measures that are used to quantify the importance of medicinal plant species in different cultural or therapeutic contexts.
+
+### Use Value (UV)
+
+The Use Value (UV) is a measure of the overall importance of a plant species based on the number of use reports. It is calculated as:
+
+`UV = sum of use reports for a species / number of informants`
+
+```{r}
+UVs(medicinal_data)
+```
+
+### Fidelity Level (FL)
+
+The Fidelity Level (FL) is the percentage of informants who mention a plant species for a specific therapeutic use. It is calculated as:
+
+`FL = (number of informants mentioning the species for a specific use / total number of informants mentioning the species for any use) × 100`
+
+```{r}
+```{r, eval = FALSE}
+# FLs(medicinal_data, "Malaria")  
+# Dataset saat ini belum memiliki kolom biner per penyakit.
+# Contoh akan diaktifkan pada versi mendatang.
+```
+```
+
+### Informant Consensus Factor (ICF)
+
+The Informant Consensus Factor (ICF) measures the level of agreement among informants on the use of plants for specific diseases. It is calculated as:
+
+`ICF = (nur - nt) / (nur - 1)`
+
+where `nur` is the number of use reports per disease and `nt` is the number of species used for that disease.
+
+```{r}
+ICFs(medicinal_data)
+```
+
+## High-Performance Computing: Parallel Processing
+
+Inspired by the Anton supercomputer from D.E. Shaw Research, which achieved a 100-fold speedup in biomolecular simulations, `ethnomedicineR` provides parallel processing capabilities for large datasets.
+
+The `ethno_parallel()` function allows you to compute multiple indices simultaneously using multiple CPU cores.
+
+```{r, eval = FALSE}
+# Calculate multiple indices in parallel
+results <- ethno_parallel(
+  medicinal_data, 
+  indices = list(UVs, FLs, ICFs), 
+  cores = 4
+)
+```
+
+This approach is particularly useful when dealing with large ethnomedicine datasets (hundreds of species, thousands of informants) where traditional sequential computation would be time-consuming.
+
+## AI-Driven Plant Prioritization
+
+Inspired by NVIDIA DGX SuperPOD's AI capabilities for drug discovery, `ethnomedicineR` provides machine learning functions to prioritize medicinal plants for further pharmacological investigation.
+
+The `ethno_ml_priority()` function uses Random Forest or XGBoost to predict which plants are most likely to yield valuable therapeutic compounds.
+
+```{r, eval = FALSE}
+# Train a model to predict research priority
+model <- ethno_ml_priority(
+  data = medicinal_data,
+  target = "research_priority",
+  method = "rf"  # Random Forest
+)
+
+# View feature importance
+plot(varImp(model))
+```
+
+This approach helps researchers focus their efforts on the most promising candidates, reducing time and cost in drug discovery pipelines.
+
+## Network Pharmacology Visualization
+
+Inspired by quantum-centric approaches to drug discovery (RIKEN/IBM 2026), `ethnomedicineR` provides network pharmacology visualization to explore relationships between plants, compounds, and diseases.
+
+The `ethno_network_plot()` function creates an interactive network visualization showing how medicinal plants connect to therapeutic compounds and the diseases they treat.
+
+```{r, eval = FALSE}
+ethno_network_plot(medicinal_data)
+```
+
+This network approach helps identify:
+- Plants with multiple therapeutic targets
+- Disease-modifying compounds
+- Potential polypharmacological effects
+
+## Ordination Methods
+
+Detrended correspondence analysis (DCA) and principal component analysis (PCA) are statistical techniques that can be useful for exploring patterns and trends in ethnomedicine data.
+
+The `ethnomedicineR` package offers a few handy tools to make these work with standard quantitative ethnomedicine data. By having access to these tools, researchers can more easily and efficiently run these analyses and incorporate the results into their research projects.
+
+## Conclusions
+
+Quantitative ethnomedicine offers a way to study the use and importance of medicinal plants in human cultures, using statistical and analytical methods to quantify and interpret data. This approach can be useful in a variety of contexts, including:
+
+- Understanding the cultural and therapeutic significance of medicinal plant species
+- Evaluating the potential of traditional medicine for modern drug discovery
+- Prioritizing plants for pharmacological screening
+- Conserving medicinal plant biodiversity
+
+One of the main benefits of quantitative ethnomedicine is that it allows researchers to rigorously and systematically analyze and interpret data, providing more reliable and objective insights into the role of medicinal plants in different cultural and therapeutic settings.
+
+The `ethnomedicineR` package integrates:
+1. **Traditional indices** (UV, FL, ICF) for standardized comparison
+2. **High-performance computing** (parallel processing) for large datasets
+3. **Machine learning** (AI) for prioritizing plants
+4. **Network pharmacology** for visualizing therapeutic relationships
+
+By using these standardized methods and statistical analyses, researchers can more accurately compare and contrast the importance of different medicinal plant species and evaluate the significance of their findings.
+
+## Acknowledgements
+
+This work was inspired by the pioneering contributions of:
+- D.E. Shaw Research and the Anton supercomputer
+- NVIDIA DGX SuperPOD for AI-driven drug discovery
+- RIKEN/IBM quantum-centric supercomputing
+
+The vignette was written and formatted using the handy tools provided by the `knitr` package (Xie 2025).
+
+## References
+
+Bache, Stefan Milton, and Hadley Wickham. 2025. Magrittr: A Forward-Pipe Operator for r. https://magrittr.tidyverse.org.
+
+Bennett, B. C., and G. T. Prance. 2000. "Introduced Plants in the Indigenous Pharmacopoeia of Northern South America." *Economic Botany* 54(1): 90-102.
+
+Evans, W. C. 2009. *Trease and Evans' Pharmacognosy*. 16th ed. Saunders Elsevier.
+
+Friedman, J., Z. Yaniv, A. Dafni, and D. Palewitch. 1986. "A Preliminary Classification of the Healing Potential of Medicinal Plants, Based on a Rational Analysis of an Ethnopharmacological Field Survey Among Bedouins in the Negev Desert, Israel." *Journal of Ethnopharmacology* 16(2-3): 275-287.
+
+Heinrich, M., A. K. Jäger, and J. Barnhart. 2018. *Ethnopharmacology*. Wiley-Blackwell.
+
+NVIDIA. 2026. "DGX SuperPOD for AI-Driven Drug Discovery." NVIDIA Corporation.
+
+RIKEN/IBM. 2026. "Quantum-Centric Supercomputing for Protein Simulation." RIKEN Center for Computational Science.
+
+Shaw, D. E., et al. 2008. "Anton: A Special-Purpose Machine that Achieves a Hundred-Fold Speedup in Biomolecular Simulations." *Proceedings of the ACM/IEEE Conference on Supercomputing (SC)*.
+
+Tardío, J., and M. Pardo-de-Santayana. 2008. "Cultural Importance Indices: A Comparative Analysis Based on the Useful Wild Plants of Southern Cantabria (Northern Spain)." *Economic Botany* 62(1): 24-39.
+
+Wickham, H., et al. 2026. dplyr: A Grammar of Data Manipulation. R package version 1.1.0.
+
+Xie, Y. 2025. knitr: A General-Purpose Package for Dynamic Report Generation in R. R package version 1.45.
