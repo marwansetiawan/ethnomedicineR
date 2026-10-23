@@ -1,41 +1,65 @@
-# ethnomedicineR <img src="man/figures/logo.png" align="right" height="139" alt="" />
+# ethnomedicineR
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/ethnomedicineR)](https://CRAN.R-project.org/package=ethnomedicineR)
-[![R-CMD-check](https://github.com/marwansetiawan/ethnomedicineR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/marwansetiawan/ethnomedicineR/actions/workflows/R-CMD-check.yaml)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <!-- badges: end -->
 
 ## 💊 Accelerating Traditional Drug Discovery with Modern Computing
 
-**`ethnomedicineR`** adalah toolkit R untuk analisis kuantitatif etnomedisin yang **menggabungkan indeks tradisional (UV, FL, ICF) dengan pendekatan komputasi modern**—terinspirasi oleh:
+**`ethnomedicineR`** is a comprehensive R toolkit for quantitative ethnomedicine analysis and traditional drug discovery. It bridges traditional knowledge with modern high-performance computing approaches inspired by:
 
-- 🧬 **Superkomputer Anton** dari D.E. Shaw Research (simulasi molekuler 100x lebih cepat)
-- ⚛️ **Komputasi Kuantum** (RIKEN/IBM: simulasi protein 12.635 atom)
-- 🧠 **AI Supercomputing** (NVIDIA DGX SuperPOD untuk penemuan obat)
+- 🧬 **Anton Supercomputer** (D.E. Shaw Research)
+- ⚛️ **Quantum-Centric Supercomputing** (RIKEN/IBM)
+- 🧠 **NVIDIA DGX SuperPOD** for AI-driven drug discovery
 
-Paket ini dirancang untuk membantu peneliti **menganalisis data etnomedisin secara lebih cepat, akurat, dan terintegrasi**—dari indeks dasar hingga prediksi AI dan visualisasi network pharmacology.
+The package is designed to help researchers analyze ethnomedicinal data faster, more accurately, and with an integrated pipeline—from core indices to AI predictions and network pharmacology.
 
 ---
 
-## ✨ Fitur Utama
+## ✨ Key Features
 
-| Fungsi | Deskripsi |
-|--------|-----------|
+### 1. Core Ethnomedicine Indices
+| Function | Description |
+| :--- | :--- |
 | `UVs()` | Use Value (Phillips & Gentry) |
 | `FLs()` | Fidelity Level (Friedman et al.) |
 | `ICFs()` | Informant Consensus Factor (Trotter & Logan) |
-| `ethno_parallel()` | **Komputasi paralel** untuk dataset besar (terinspirasi Anton/Frontier) |
-| `ethno_ml_priority()` | **AI/ML** untuk memprediksi prioritas penelitian tanaman (terinspirasi NVIDIA DGX) |
-| `ethno_network_plot()` | **Network pharmacology** (tanaman-senyawa-penyakit) terinspirasi quantum computing |
+| `RIs()` | Relative Importance (Bennett & Prance) |
+| `CIs_med()` | Cultural Importance Index (Tardío) |
+| `MUVs()` | Medicinal Use Value (Silva et al.) |
+| `IARs()` | Informant Agreement Ratio |
+| `BEIs()` | Botanical Ethnoknowledge Index |
+
+### 2. High-Performance & AI/ML
+| Function | Description |
+| :--- | :--- |
+| `ethno_parallel()` | Parallel processing for large datasets (Anton-inspired) |
+| `ethno_ml_priority()` | Machine Learning for plant prioritization (NVIDIA DGX-inspired) |
+| `ethno_deep_priority()` | Deep Learning (Neural Network) priority prediction |
+| `ethno_llm_mine()` | Literature mining using Large Language Models |
+| `ethno_mol_prop()` | Molecular property prediction (PubChem API) |
+| `ethno_admet()` | ADMET prediction (Rule-based drug-likeness) |
+
+### 3. Network Pharmacology & Databases
+| Function | Description |
+| :--- | :--- |
+| `ethno_network_plot()` | Network pharmacology visualization |
+| `ethno_ppi_network()` | Protein-Protein Interaction network (STRING API) |
+| `ethno_pathway_enrich()` | Pathway enrichment analysis (KEGG API) |
+| `ethno_target_predict()` | Target prediction for compounds |
+| `ethno_compound_target()` | Compound-Target-Disease network |
+| `ethno_pubchem()` | Query chemical data from PubChem |
+| `ethno_chembl()` | Query bioactivity data from ChEMBL |
+| `ethno_kegg()` | Query pathways & diseases from KEGG |
+| `ethno_npass()` | Query natural product activity from NPASS |
 
 ---
 
-## 🔧 Instalasi
+## 🔧 Installation
+
+You can install the development version from **GitHub**:
 
 ```r
-# Dari CRAN (setelah rilis)
-install.packages("ethnomedicineR")
-
-# Dari GitHub (versi pengembangan)
-devtools::install_github("marwansetiawan/ethnomedicineR")
+# install.packages("pak")
+pak::pak("marwansetiawan/ethnomedicineR")
