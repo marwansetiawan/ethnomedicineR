@@ -63,3 +63,7 @@ You can install the development version from **GitHub**:
 ```r
 # install.packages("pak")
 pak::pak("marwansetiawan/ethnomedicineR")
+
+### 🌐 Interactive Network Pharmacology
+![Interactive Network](man/figures/network_interactive.png)
+*Interactive VOSviewer-style network visualization using ForceAtlas2 layout.*
