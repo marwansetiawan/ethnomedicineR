@@ -1,19 +1,20 @@
-# ethnomedicineR
+# ethnomedicineR <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![R-CMD-check](https://img.shields.io/badge/R--CMD--check-passing-brightgreen.svg)]()
 <!-- badges: end -->
 
 ## 💊 Accelerating Traditional Drug Discovery with Modern Computing
 
 **`ethnomedicineR`** is a comprehensive R toolkit for quantitative ethnomedicine analysis and traditional drug discovery. It bridges traditional knowledge with modern high-performance computing approaches inspired by:
 
-- 🧬 **Anton Supercomputer** (D.E. Shaw Research)
-- ⚛️ **Quantum-Centric Supercomputing** (RIKEN/IBM)
-- 🧠 **NVIDIA DGX SuperPOD** for AI-driven drug discovery
+- 🧬 **Anton Supercomputer** (D.E. Shaw Research) for accelerated molecular simulations.
+- ⚛️ **Quantum-Centric Supercomputing** (RIKEN/IBM) for complex molecular interaction mapping.
+- 🧠 **NVIDIA DGX SuperPOD** for AI-driven drug discovery.
 
-The package is designed to help researchers analyze ethnomedicinal data faster, more accurately, and with an integrated pipeline—from core indices to AI predictions and network pharmacology.
+The package is designed to help researchers analyze ethnomedicinal data faster, more accurately, and with an integrated pipeline—from classic indices to deep learning predictions, network pharmacology, and interactive visualizations.
 
 ---
 
@@ -41,10 +42,11 @@ The package is designed to help researchers analyze ethnomedicinal data faster, 
 | `ethno_mol_prop()` | Molecular property prediction (PubChem API) |
 | `ethno_admet()` | ADMET prediction (Rule-based drug-likeness) |
 
-### 3. Network Pharmacology & Databases
+### 3. Network Pharmacology & Database Integration
 | Function | Description |
 | :--- | :--- |
-| `ethno_network_plot()` | Network pharmacology visualization |
+| `ethno_network_plot()` | Static network visualization (ggplot2/ggraph) |
+| `ethno_network_interactive()` | **Interactive VOSviewer-style network (visNetwork)** |
 | `ethno_ppi_network()` | Protein-Protein Interaction network (STRING API) |
 | `ethno_pathway_enrich()` | Pathway enrichment analysis (KEGG API) |
 | `ethno_target_predict()` | Target prediction for compounds |
@@ -56,14 +58,13 @@ The package is designed to help researchers analyze ethnomedicinal data faster, 
 
 ---
 
-## 🔧 Installation
+## 🎨 Visualization Showcase
 
-You can install the development version from **GitHub**:
+`ethnomedicineR` provides publication-ready static plots and interactive graphs to explore complex ethnomedicinal data.
 
 ```r
-# install.packages("pak")
-pak::pak("marwansetiawan/ethnomedicineR")
+library(ethnomedicineR)
+data(medicinal_test_data)
 
-### 🌐 Interactive Network Pharmacology
-![Interactive Network](man/figures/network_interactive.png)
-*Interactive VOSviewer-style network visualization using ForceAtlas2 layout.*
+# Generate an interactive VOSviewer-style network
+ethno_network_interactive(medicinal_test_data)
